@@ -18,15 +18,23 @@ If you are wondering where to begin in the  journey contributing to open-source 
 * [First Contributions Repository](https://github.com/firstcontributions/first-contributions)
 * [A Beginner's Guide to Contributing to Open Source Projects](https://blog.ossph.org/a-beginners-guide-to-contributing-to-open-source-projects/)
 
-## List of Good First Issues to start Collaborating! :surfer: <sub><sub>Last run: {{today}}</sub></sub>
+{% if results %}
+## List of Good First Issues to start Collaborating! :surfer: <sub><sub>Last run: {{ today }}</sub></sub>
 
 {% for result in results %}
 ### {{ result.language }}
 
+{% if result.issues %}
 | Repo | Title | Comments |
 |------|-------|----------|
 {% for issue in result.issues %}
-| {{ issue.repo }} | [{{ issue.title }}]({{ issue.url }}) | {{ issue.comments }} |
+| {{ issue.repo }} | [{{ issue.title | replace("|", "\|") }}]({{ issue.url }}) | {{ issue.comments }} |
 {% endfor %}
+{% else %}
+_No issues found for this language._
+{% endif %}
 
 {% endfor %}
+{% else %}
+**No results found.**
+{% endif %}
